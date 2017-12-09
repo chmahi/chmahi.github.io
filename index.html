@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Example site</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="autocomplete/easy-autocomplete.min.css" rel="stylesheet">
+    <link href="autocomplete/easy-autocomplete.themes.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-12 msg">
+            <h3>Message Pricing</h3>
+            <form>
+                <div class="form-group col-md-6">
+                    <label>Country</label>
+                    <input type="text" class="form-control" id="countries" placeholder="enter the country">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>SMS Type</label>
+                    <select class="form-control" id="smsTypeA" onchange="smsType(value)">
+                        <option value="transactional">Transcational</option>
+                        <option value="sendOTP">SendOTP</option>
+                        <option value="Promotional">Promotional</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>No.Of SMS</label>
+
+                    <input type="text" class="form-control" placeholder="sms" id="unitsCount" onkeyup="smsPackage(value)">
+                </div>
+                <div class="col-md-6">
+                    <h5>1 credit =
+                        <span id="crediVal">--</span>
+                        <span id="currency">--</span>
+                    </h5>
+                    <h1>1 SMS = 1 Credit /
+                        <span id="crediValB">--</span>
+                    </h1>
+                    <div class="form-group tranSelect">
+                        <select class="form-control" id="mySelect" onchange="myPrivateConverterMany(value)">
+                            <option value="INR" selected>INR</option>
+                            <option value="USD">USD</option>
+                            <option value="AED">AED</option>
+                            <option value="AUD">AUD</option>
+                            <option value="NZD">NZD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4>
+                            <span id="FinalAmount">--</span>
+                            <span id="currencyB">--</span> (Total amount)*</h4>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script src="autocomplete/jquery.easy-autocomplete.min.js"></script>
+    <script>
+        var options = {
+            url: "https://restcountries.eu/rest/v2/all",
+            getValue: "name",
+            list: {
+                match: {
+                    enabled: true
+                }
+            }
+        };
+        $("#countries").easyAutocomplete(options);
+    </script>
+    <script type="text/javascript">
+        var smsPack = 0;
+        var SmsPacType ='transactional';
+        var totalAmount = 0;
+        var exchangeRate = 1;
+        function smsPackage(val) {
+
+            $.ajax({
+                url: "sms.json",
+                dataType: "json",
+                success: function (json) {
+                    console.log(json[0].transactional);
+                    console.log("Mahi")
+                    console.log(SmsPacType);
+                    var arrayVal = [];
+                    if(SmsPacType == 'transactional'){
+                        arrayVal = json[0]['transactional'];
+                    }
+                    if(SmsPacType == 'sendOTP'){
+                        arrayVal = json[0]['sendOTP'];
+                    }
+                    if(SmsPacType == 'Promotional'){
+                        arrayVal = json[0]['Promotional'];
+                    }
+                    var finVal = arrayVal.filter(function (item) {
+                        return item.smsCount > val;
+                    });
+                   
+                    if (finVal[0]) {
+                        smsPack = finVal[0].creditAmount * exchangeRate;
+                        console.log(smsPack + 'sms');
+                        totalAmount = val * smsPack;
+                        console.log(finVal[0].creditAmount);
+                    }
+                    else {
+                        smsPack = 0.13 * exchangeRate;
+                        totalAmount = val * smsPack;
+                    }
+                    console.log();
+                    $('#crediVal').text(smsPack.toFixed(4));
+                    $('#crediValB').text(smsPack.toFixed(4));
+                    $('#FinalAmount').text(totalAmount.toFixed(2));
+                }
+            });
+        }
+        var sourceCurrency = 'USD';
+        // var smsType = $('#smsType').val();
+        function myPrivateConverterMany(val) {
+            $('#currency').text(val);
+            $('#currencyB').text(val);
+            // var units = $('#unitsCount').val();
+            var access_key = '978aab692232cd27b7156eee85e92571';
+            // console.log(smsunits + "SMS");
+            $.ajax({
+                url: 'http://apilayer.net/api/live?access_key=' + access_key + '& source=' + sourceCurrency + '&currencies=INR,' + val + '&format=1',
+                success: function (json) {
+                    console.log(json.quotes);
+                    exchangeRate = json.quotes['USD' + val] / json.quotes['USDINR'];
+                    var currentSMSCount = $('#unitsCount').val();
+                    smsPackage(currentSMSCount);
+                    $('#currency').text(val);
+                    $('#currencyB').text(val);
+                }
+            });
+        }
+
+        function smsType(val){
+            SmsPacType = val; 
+            var currentSMSCount = $('#unitsCount').val();
+            smsPackage(currentSMSCount);
+            console.log(val);
+        }
+        myPrivateConverterMany('INR');
+        $('#mySelect').val('INR');
+        $('#countries').val('India');
+        $('#unitsCount').val(5000);
+        smsPackage(5000);
+        $('#smsTypeA').val('transactional');
+    </script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

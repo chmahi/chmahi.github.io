@@ -1,0 +1,23 @@
+[{
+    "transactional": [
+        { "smsCount": 10000, "totalAmount": 16500, "creditAmount":0.25, "currency": "INR" },
+        { "smsCount": 20000, "totalAmount": 52500, "creditAmount":0.2, "currency": "INR" },
+        { "smsCount": 50000, "totalAmount": 202500, "creditAmount":0.17, "currency": "INR" },
+        { "smsCount": 100000, "totalAmount": 1500000,  "creditAmount":0.15, "currency": "INR" },
+        { "smsCount": 0, "totalAmount": 3028500, "creditAmount":0.13, "currency": "INR" }
+    ],
+    "sendOTP": [
+        { "smsCount": 10000, "totalAmount": 16500, "creditAmount":0.35, "currency": "INR" },
+        { "smsCount": 20000, "totalAmount": 52500, "creditAmount":0.3, "currency": "INR" },
+        { "smsCount": 50000, "totalAmount": 202500, "creditAmount":0.2, "currency": "INR" },
+        { "smsCount": 100000, "totalAmount": 1500000,  "creditAmount":0.18, "currency": "INR" },
+        { "smsCount": 0, "totalAmount": 3028500, "creditAmount":0.16, "currency": "INR" }
+    ],
+    "Promotional": [
+        { "smsCount": 10000, "totalAmount": 16500, "creditAmount":0.45, "currency": "INR" },
+        { "smsCount": 20000, "totalAmount": 52500, "creditAmount":0.4, "currency": "INR" },
+        { "smsCount": 50000, "totalAmount": 202500, "creditAmount":0.3, "currency": "INR" },
+        { "smsCount": 100000, "totalAmount": 1500000,  "creditAmount":0.25, "currency": "INR" },
+        { "smsCount": 0, "totalAmount": 3028500, "creditAmount":0.18, "currency": "INR" }
+    ]
+}]

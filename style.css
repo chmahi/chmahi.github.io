@@ -1,0 +1,187 @@
+body {
+    background: #488dd8;
+    color: #fff;
+    padding-top: 80px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.msg {
+    background-color: #13334c;
+    border-radius: 4px;
+    padding: 30px;
+    position: relative;
+}
+
+.msg h3 {
+    color: #ffffff;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -204px;
+    background-color: #425c70;
+    padding: 7px 131px;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.msg form {
+    margin-top: 40px;
+}
+
+.msg label {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.msg .form-control {
+    height: 45px;
+    border-radius: 0px;
+    padding: 6px 6px;
+}
+
+.msg .form-control:focus {
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+.tranSelect select {
+    border: 1px solid transparent;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #fff;
+    width: 50px;
+    position: relative;
+    z-index: 9;
+}
+
+.tranSelect {
+    position: relative;
+    width: 50px;
+}
+
+.tranSelect:after {
+    content: 'v';
+    position: absolute;
+    right: -2px;
+    top: 12px;
+    display: inline-block;
+    color: #8d8d8d;
+    z-index: 2;
+    font: FontAwesome;
+}
+
+.tranSelect select option {
+    background-color: transparent !important;
+    border: 1px solid #e4e4e4;
+    color: #000;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    color: #8398a9;
+    font-size: 15px;
+}
+
+.tranSelect select {
+    border: 0px !important;
+    background-color: transparent !important;
+    color: #fff !important;
+}
+
+.countrySel {
+    width: 100px;
+    -moz-appearance: none !important;
+}
+
+.countrySel select option {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media only screen and (max-width:612px) {
+    .msg h3 {
+        margin-left: -212px;
+    }
+    h1 {
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width:450px) {
+    .msg h3 {
+        padding: 10px 102px;
+        margin-left: -165px;
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    .msg label {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h4 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:370px) {
+    .msg h3 {
+        padding: 10px 47px;
+        margin-left: -112px;
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    .msg label {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h4 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    .msg h3 {
+        padding: 8px 60px;
+        margin-left: -124px;
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 13px;
+    }
+    .msg label {
+        font-size: 15px;
+    }
+    h1 {
+        font-size: 23px;
+    }
+    h4 {
+        font-size: 19px;
+    }
+}
+
+.easy-autocomplete-container ul li,
+.easy-autocomplete-container ul .eac-category {
+    color: #000;
+}
+
+.easy-autocomplete-container {
+    z-index: 12 !important;
+}
